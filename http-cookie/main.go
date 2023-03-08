@@ -35,7 +35,9 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		c.Name = cookieName
 		c.Value = gubrak.RandomString(32)
 		c.Expires =time.Now().Add(5 * time.Minute)
+		c.HttpOnly =true // cookies can only be created from back end,
 		http.SetCookie(w, c)
+
 	}
 	w.Write([]byte(c.Value))
 
