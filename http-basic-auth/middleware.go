@@ -5,7 +5,6 @@ import "net/http"
 const USERNAME = "coding"
 const PASSWORD = "tanker"
 
-curl -X GET --user coding:tanke http://localhost:8080/student?id=s001
 
 func Auth(w http.ResponseWriter, r *http.Request) bool{
 	username, password, ok := r.BasicAuth()
