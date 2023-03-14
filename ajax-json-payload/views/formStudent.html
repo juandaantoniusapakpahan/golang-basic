@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="static/jquery-3.6.4.min.js"></script>
+    <script>
+      $(function () {
+        $("#student-form").on("submit", function (e) {
+          e.preventDefault();
+          var $self = $(this);
+          var payload = JSON.stringify({
+            name: $('[name="name"]').val(),
+            email: $('[name="email"]').val(),
+            grade: parseInt($('[name="grade"]').val(), 10),
+          });
+
+          $.ajax({
+            url: $self.attr("action"),
+            type: $self.attr("method"),
+            data: payload,
+            contentType: "application/json",
+            success: function (data) {
+              alert("You will now be redirected.");
+              window.location = "http://localhost:8080";
+            },
+            error: function (xhr, type, exception) {
+              alert(response.d);
+            },
+          });
+        });
+      });
+    </script>
+    <title>Student Form</title>
+  </head>
+  <body>
+    <form method="post" action="/student" id="student-form">
+      <lable>Name: </lable><br />
+      <input type="text" placeholder="type Name" name="name" required /><br />
+      <br />
+
+      <label>Email: </label><br />
+      <input
+        type="text"
+        name="email"
+        placeholder="provide email"
+        required
+      /><br /><br />
+      <label>Grade</label><br />
+      <input
+        type="number"
+        name="grade"
+        placeholder="provide grade"
+      /><br /><br />
+      <button type="submit">Save</button>
+    </form>
+  </body>
+</html>
